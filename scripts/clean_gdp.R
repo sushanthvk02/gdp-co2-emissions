@@ -2,10 +2,8 @@
 library(tidyverse)
 
 # Step 1: Load the raw GDP dataset
-# - Skip the first 4 rows because they contain metadata (not actual data)
 gdp_raw <- read_csv("data/original/gdp.csv", skip = 4)
 
-# Preview the raw dataset
 head(gdp_raw)
 
 # Step 2: Select only necessary columns
@@ -22,21 +20,23 @@ colnames(gdp_clean)
 # - Pivot year columns (1960, 1961, ...) into two columns: 'Year' and 'GDP'
 gdp_long <- gdp_clean %>%
   pivot_longer(
-    cols = -`Country Name`,   # All columns except 'Country Name' will be pivoted
-    names_to = "Year",        # New column to store year values
-    values_to = "GDP"         # New column to store corresponding GDP values
+    cols = -`Country Name`,   
+    names_to = "Year",    
+    values_to = "GDP"     
   ) %>%
-  rename(Country = `Country Name`) %>%  # Rename 'Country Name' to 'Country' for simplicity
+  rename(Country = `Country Name`) %>%  
   mutate(
     year = as.integer(Year),           # Ensure year is numeric
     gdp = as.numeric(GDP)               # Ensure GDP is numeric
   ) %>%
-  select(Country, Year, GDP) %>%        # Reorder columns: Country, Year, GDP
+  filter(year >= 1990 & year <= 2023) %>%
+  select(Country, Year, GDP) %>%        
   arrange(Year, Country)                # Sort the data first by Year, then Country
+
+
 
 # Step 4: Save the cleaned long-format GDP dataset
 write_csv(gdp_long, "data/cleaned/gdp.csv")
 
-# Step 5: Quick preview of the final dataset
 head(gdp_long)
 

@@ -1,23 +1,25 @@
-library(tidyr)
-library(dplyr)
+library(tidyverse)
 
-# Read data (replace with your actual file path)
-co2 <- read.csv("data/original/co2_emissions.csv", check.names = FALSE, na.strings = c("", "NA"), skip = 1)
+# Step 1: Load the dataset
+co2_raw <- read_csv("data/original/co2_emissions.csv")
 
-head(co2)
-
-colnames(co2)[1] <- "Year"
-
-# Clean column names and reshape
-co2_long <- co2 %>%
-  pivot_longer(
-    cols = -Year,
-    names_to = "Country",
-    values_to = "CO2",
-    values_drop_na = TRUE
+# Step 2: Clean as needed
+co2_clean <- co2_raw %>%
+  select(-Code) %>%  # Remove 'Code' column
+  rename(
+    country = Entity,
+    year = Year,
+    co2_emissions = `Annual CO₂ emissions`
   ) %>%
-  arrange(Year, Country)
+  mutate(
+    year = as.integer(year),
+    co2_emissions = as.numeric(co2_emissions) / 1e6  # Convert tonnes to million tonnes
+  ) %>%
+  filter(year >= 1990 & year <= 2023) %>%  # Filter only years 1990 to 2023
+  arrange(year, country)
 
-# View result
-head(co2_long, 10)
+# Step 3: Save cleaned, filtered data
+write_csv(co2_clean, "data/cleaned/co2_emissions.csv")
+
+head(co2_clean)
 
