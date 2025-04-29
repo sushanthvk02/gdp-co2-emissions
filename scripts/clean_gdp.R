@@ -21,17 +21,17 @@ colnames(gdp_clean)
 gdp_long <- gdp_clean %>%
   pivot_longer(
     cols = -`Country Name`,   
-    names_to = "Year",    
-    values_to = "GDP"     
+    names_to = "year",    
+    values_to = "gdp"     
   ) %>%
-  rename(Country = `Country Name`) %>%  
+  rename(country = `Country Name`) %>%  
   mutate(
-    year = as.integer(Year),           # Ensure year is numeric
-    gdp = as.numeric(GDP)               # Ensure GDP is numeric
+    year = as.integer(year),           # Ensure year is numeric
+    gdp = as.numeric(gdp)               # Ensure GDP is numeric
   ) %>%
   filter(year >= 1990 & year <= 2023) %>%
-  select(Country, Year, GDP) %>%        
-  arrange(Year, Country)                # Sort the data first by Year, then Country
+  select(country, year, gdp) %>%        
+  arrange(year, country)                # Sort the data first by Year, then Country
 
 
 
