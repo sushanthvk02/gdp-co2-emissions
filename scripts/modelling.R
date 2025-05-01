@@ -11,10 +11,3 @@ summary(model)
 
 
 
-
-
-
-
-
-
-
