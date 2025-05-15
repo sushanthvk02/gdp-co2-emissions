@@ -1,25 +1,24 @@
 library(tidyverse)
 
-df <- read_csv("gdp_co2_data.csv")
+df <- read_csv("gdp_co2_population_data.csv")
 
-# Summary for GDP
-gdp_summary <- df %>%
-  summarise(
-    min_gdp = min(gdp, na.rm = TRUE),
-    max_gdp = max(gdp, na.rm = TRUE),
-    mean_gdp = mean(gdp, na.rm = TRUE),
-    median_gdp = median(gdp, na.rm = TRUE)
-  )
+summary_table <- tibble(
+  Variable = c("GDP", "CO₂ Emissions", "Population"),
+  Min = c(min(df$gdp, na.rm = TRUE),
+          min(df$co2_emissions, na.rm = TRUE),
+          min(df$population, na.rm = TRUE)),
+  Max = c(max(df$gdp, na.rm = TRUE),
+          max(df$co2_emissions, na.rm = TRUE),
+          max(df$population, na.rm = TRUE)),
+  Mean = c(mean(df$gdp, na.rm = TRUE),
+           mean(df$co2_emissions, na.rm = TRUE),
+           mean(df$population, na.rm = TRUE)),
+  Median = c(median(df$gdp, na.rm = TRUE),
+             median(df$co2_emissions, na.rm = TRUE),
+             median(df$population, na.rm = TRUE))
+)
 
-# Summary for CO2 Emissions
-co2_summary <- df %>%
-  summarise(
-    min_co2 = min(co2_emissions, na.rm = TRUE),
-    max_co2 = max(co2_emissions, na.rm = TRUE),
-    mean_co2 = mean(co2_emissions, na.rm = TRUE),
-    median_co2 = median(co2_emissions, na.rm = TRUE)
-  )
+print(summary_table)
 
-# Print summaries
-print(gdp_summary)
-print(co2_summary)
+write_csv(summary_table, "tables/summary_statistics.csv")
+
