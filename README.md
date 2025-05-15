@@ -3,7 +3,7 @@
 
 This solo project investigates whether economic growth, measured by GDP, is still tightly linked to CO₂ emissions, and whether signs of decoupling are beginning to emerge. It was completed as part of DATA 375: Statistical Computing at the University of Arizona.
 
-## 🔍 Project Summary
+##  Project Summary
 - Built a merged dataset using public data from the World Bank and Our World in Data (1990–2023)
 - Explored patterns using time series plots, scatterplots, and summary statistics
 - Fitted linear and log-log regression models, including models with population as a second predictor
@@ -11,7 +11,7 @@ This solo project investigates whether economic growth, measured by GDP, is stil
 - Applied **bootstrapping** to assess model stability and construct confidence intervals
 - Performed **fairness analysis** by comparing CO₂ emissions and GDP on a per capita basis and across income groups
 
-## 📁 Repository Structure
+##  Repository Structure
 
 project-root/
 ├── data/
