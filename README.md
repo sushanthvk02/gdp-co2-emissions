@@ -12,25 +12,15 @@ This solo project investigates whether economic growth, measured by GDP, is stil
 - Performed **fairness analysis** by comparing CO₂ emissions and GDP on a per capita basis and across income groups
 
 ##  Repository Structure
-
+```bash
 project-root/
 ├── data/
-│ ├── original/ # Raw input data
-│ └── cleaned/ # Final merged dataset (1990–2023)
 ├── scripts/
-│ ├── modeling.R # All regression, simulation, and bootstrap code
-│ ├── visualizations.R # Plots used in the report
-│ └── summary_statistics.R # EDA and variable summaries
 ├── plots/
-│ ├── *.png # All generated visualizations
 ├── tables/
-│ ├── *.csv # Output tables (model coeffs, summaries, etc.)
 ├── docs/
-│ ├── Data 375_Preliminary Report.pdf
-│ ├── DATA 375 Presentation.pdf
-│ └── Final Report.pdf
 └── README.md
-
+```
 
 ## Data Sources
 - **GDP:** [World Bank](https://data.worldbank.org/indicator/NY.GDP.MKTP.CD)
